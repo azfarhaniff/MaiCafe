@@ -1,1 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Crûst & Brew Café — Menu</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+    :root {
+      --cream:    #F5EFE0;
+      --cream2:   #EDE3CC;
+      --burgundy: #6B1A2A;
+      --dark:     #2C1A10;
+      --gold:     #C49A3C;
+      --text:     #3A2410;
+      --muted:    #7A6045;
+    }
+
+    body {
+      background: var(--cream);
+      color: var(--text);
+      font-family: 'Lato', sans-serif;
+      font-size: 15px;
+      line-height: 1.5;
+    }
+
+    /* ── HEADER ── */
+    header {
+      background: var(--cream2);
+      border-bottom: 3px solid var(--burgundy);
+      padding: 36px 20px 24px;
+      text-align: center;
+      position: relative;
+    }
+    header::before, header::after {
+      content: '';
+      display: block;
+      height: 2px;
+      background: var(--gold);
+      margin: 0 auto 12px;
+      width: 60px;
+    }
+    header::after { margin: 12px auto 0; }
+
+    .cafe-logo-ring {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      border: 3px solid var(--burgundy);
+      border-radius: 50%;
+      width: 140px;
+      height: 140px;
+      justify-content: center;
+      margin-bottom: 14px;
+      background: var(--cream);
+      box-shadow: 0 0 0 6px var(--cream2), 0 0 0 8px var(--burgundy);
+    }
+    .cafe-logo-ring .est { font-size: 10px; letter-spacing: 3px; color: var(--burgundy); font-family: 'Lato', sans-serif; font-weight: 700; }
+    .cafe-logo-ring .icon { font-size: 30px; }
+    .cafe-logo-ring .year { font-size: 10px; color: var(--burgundy); font-weight: 700; }
+
+    .brand-name {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 6vw, 3.4rem);
+      font-weight: 700;
+      color: var(--burgundy);
+      letter-spacing: 1px;
+      line-height: 1.1;
+    }
+    .brand-sub {
+      font-family: 'Lato', sans-serif;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      font-size: 12px;
+      color: var(--muted);
+      margin: 4px 0 8px;
+    }
+    .tagline-strip {
+      background: var(--burgundy);
+      color: #fff;
+      letter-spacing: 3px;
+      font-size: 11px;
+      text-transform: uppercase;
+      padding: 7px 20px;
+      margin-top: 18px;
+      display: inline-block;
+      border-radius: 2px;
+    }
+    .header-mottos {
+      display: flex;
+      justify-content: space-between;
+      position: absolute;
+      top: 36px;
+      left: 24px;
+      right: 24px;
+      pointer-events: none;
+    }
+    .header-mottos span {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 13px;
+      color: var(--muted);
+      max-width: 130px;
+      text-align: center;
+    }
+
+    /* ── LAYOUT ── */
+    .page {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 30px 16px 50px;
+    }
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+    @media (max-width: 720px) {
+      .two-col { grid-template-columns: 1fr; }
+      .header-mottos { display: none; }
+    }
+
+    /* ── SECTION HEADING ── */
+    .section-heading {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--burgundy);
+      color: #fff;
+      padding: 8px 16px;
+      border-radius: 4px;
+      margin-bottom: 18px;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .section-heading .icon { font-size: 1.1rem; }
+
+    /* ── MAIN COURSE ── */
+    .menu-item {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      padding: 12px 0;
+      border-bottom: 1px dashed var(--cream2);
+      position: relative;
+    }
+    .menu-item:last-child { border-bottom: none; }
+    .item-img {
+      width: 80px;
+      height: 70px;
+      border-radius: 6px;
+      object-fit: cover;
+      flex-shrink: 0;
+      background: var(--cream2);
+    }
+    .item-info { flex: 1; }
+    .item-name {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 0.97rem;
+      color: var(--dark);
+      line-height: 1.3;
+    }
+    .item-desc {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 3px;
+      line-height: 1.4;
+    }
+    .item-price {
+      font-weight: 700;
+      color: var(--burgundy);
+      font-size: 0.97rem;
+      white-space: nowrap;
+      padding-top: 2px;
+    }
+    .badge {
+      position: absolute;
+      top: 14px;
+      left: -8px;
+      background: var(--gold);
+      color: #fff;
+      font-size: 8px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 3px 6px;
+      border-radius: 3px;
+      line-height: 1.2;
+      text-align: center;
+    }
+
+    /* ── SIDE MENU GRID ── */
+    .side-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+    @media (max-width: 480px) { .side-grid { grid-template-columns: repeat(2,1fr); } }
+    .side-item { text-align: center; }
+    .side-item img {
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: cover;
+      border-radius: 8px;
+      background: var(--cream2);
+    }
+    .side-item .item-name { font-size: 0.82rem; margin-top: 5px; }
+    .side-item .item-price { font-size: 0.85rem; color: var(--burgundy); font-weight: 700; }
+
+    /* ── DRINKS GRID ── */
+    .drinks-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 6px;
+    }
+    .drinks-grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      max-width: 60%;
+    }
+    @media (max-width: 480px) {
+      .drinks-grid, .drinks-grid-2 { grid-template-columns: repeat(2, 1fr); max-width: 100%; }
+    }
+    .drink-card { text-align: center; }
+    .drink-card img {
+      width: 100%;
+      aspect-ratio: 0.8;
+      object-fit: cover;
+      border-radius: 10px;
+      background: var(--cream2);
+    }
+    .drink-card .item-name { font-size: 0.82rem; margin-top: 6px; }
+    .drink-card .item-price { font-size: 0.85rem; color: var(--burgundy); font-weight: 700; }
+
+    /* ── SIMPLE LIST (non-milky / hot drinks) ── */
+    .list-section { margin-bottom: 24px; }
+    .list-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 5px 0;
+      border-bottom: 1px dotted var(--cream2);
+    }
+    .list-row:last-child { border-bottom: none; }
+    .list-row .name { font-size: 0.88rem; color: var(--text); }
+    .list-row .price { font-weight: 700; color: var(--burgundy); font-size: 0.88rem; }
+
+    /* ── DESSERT ── */
+    .dessert-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    @media (max-width: 480px) { .dessert-grid { grid-template-columns: repeat(2, 1fr); } }
+    .dessert-card { text-align: center; }
+    .dessert-card img {
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: cover;
+      border-radius: 8px;
+      background: var(--cream2);
+    }
+    .dessert-card .item-name { font-size: 0.82rem; margin-top: 5px; }
+    .dessert-card .item-price { font-size: 0.85rem; color: var(--burgundy); font-weight: 700; }
+
+    /* ── BOTTOM ── */
+    .two-col-bottom {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 32px;
+    }
+    @media (max-width: 720px) { .two-col-bottom { grid-template-columns: 1fr; } }
+
+    footer {
+      background: var(--burgundy);
+      color: #f5d9a0;
+      text-align: center;
+      padding: 22px 16px;
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.1rem;
+      letter-spacing: 1px;
+    }
+    footer .social {
+      margin-top: 8px;
+      font-family: 'Lato', sans-serif;
+      font-style: normal;
+      font-size: 12px;
+      letter-spacing: 2px;
+      color: #e0c080;
+      opacity: 0.85;
+    }
+
+    .divider {
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold), transparent);
+      margin: 28px 0;
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-mottos">
+    <span>Good Food.<br>Great Brew.</span>
+    <span>Made Fresh.<br>Served With Love.</span>
+  </div>
+  <div class="cafe-logo-ring">
+    <span class="est">EST.</span>
+    <span class="icon">🥐☕</span>
+    <span class="year">2024</span>
+  </div>
+  <div class="brand-name">Crûst &amp; Brew</div>
+  <div class="brand-sub">— Café —</div>
+  <div class="tagline-strip">Freshly Baked, Perfectly Brewed</div>
+</header>
+
+<div class="page">
+  <div class="two-col">
+
+    <!-- LEFT: MAIN COURSE -->
+    <div>
+      <div class="section-heading"><span class="icon">🍴</span> Main Course</div>
+
+      <div class="menu-item" style="padding-left:10px;">
+        <span class="badge">Best<br>Seller</span>
+        <img class="item-img" src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=160&q=80" alt="Bolognese Meatball Mozza Bun" />
+        <div class="item-info">
+          <div class="item-name">Bolognese Meatball Mozza Bun</div>
+          <div class="item-desc">Juicy meatball with bolognese sauce and melted mozzarella in a soft bun.</div>
+        </div>
+        <div class="item-price">RM12.00</div>
+      </div>
+
+      <div class="menu-item">
+        <img class="item-img" src="https://images.unsplash.com/photo-1619740455993-9d622b69f3ae?w=160&q=80" alt="Bolognese Meatball Mayo Bun" />
+        <div class="item-info">
+          <div class="item-name">Bolognese Meatball Mayo Bun</div>
+          <div class="item-desc">Bolognese meatball topped with creamy mayo in a soft bun.</div>
+        </div>
+        <div class="item-price">RM10.00</div>
+      </div>
+
+      <div class="menu-item">
+        <img class="item-img" src="https://images.unsplash.com/photo-1550317138-10000687a72b?w=160&q=80" alt="Cheesy Carbonara ChickenBall Bun" />
+        <div class="item-info">
+          <div class="item-name">Cheesy Carbonara ChickenBall Bun</div>
+          <div class="item-desc">Chicken ball with creamy carbonara sauce and cheese in a soft bun.</div>
+        </div>
+        <div class="item-price">RM12.00</div>
+      </div>
+
+      <div class="menu-item">
+        <img class="item-img" src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=160&q=80" alt="Cheesy Meat Lover Pizza" />
+        <div class="item-info">
+          <div class="item-name">Cheesy Meat Lover Pizza</div>
+          <div class="item-desc">Loaded with beef, chicken, pepperoni and lots of cheese.</div>
+        </div>
+        <div class="item-price">RM28.90</div>
+      </div>
+
+      <div class="menu-item">
+        <img class="item-img" src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=160&q=80" alt="Hawaiian Chicken Pizza" />
+        <div class="item-info">
+          <div class="item-name">Hawaiian Chicken Pizza</div>
+          <div class="item-desc">Chicken, pineapple, mozzarella cheese and pizza sauce.</div>
+        </div>
+        <div class="item-price">RM26.90</div>
+      </div>
+
+      <div class="menu-item" style="padding-left:10px;">
+        <span class="badge" style="background:var(--burgundy);">Chef's<br>Choice</span>
+        <img class="item-img" src="https://images.unsplash.com/photo-1598103442097-8b74394b95c3?w=160&q=80" alt="Chicken Chop" />
+        <div class="item-info">
+          <div class="item-name">Chicken Chop</div>
+          <div class="item-desc">Grilled chicken chop served with black pepper sauce and side vegetables.</div>
+        </div>
+        <div class="item-price">RM24.90</div>
+      </div>
+
+      <div class="menu-item">
+        <img class="item-img" src="https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=160&q=80" alt="Creamy Carbonara Pasta" />
+        <div class="item-info">
+          <div class="item-name">Creamy Carbonara Pasta</div>
+          <div class="item-desc">Spaghetti in creamy carbonara sauce with chicken and mushroom.</div>
+        </div>
+        <div class="item-price">RM22.90</div>
+      </div>
+
+      <div class="menu-item">
+        <img class="item-img" src="https://images.unsplash.com/photo-1555949258-eb67b1ef0ceb?w=160&q=80" alt="Bolognese Pasta" />
+        <div class="item-info">
+          <div class="item-name">Bolognese Pasta</div>
+          <div class="item-desc">Spaghetti with rich and hearty bolognese sauce.</div>
+        </div>
+        <div class="item-price">RM21.90</div>
+      </div>
+
+      <div class="menu-item">
+        <img class="item-img" src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601?w=160&q=80" alt="Creamy Mushroom Pasta" />
+        <div class="item-info">
+          <div class="item-name">Creamy Mushroom Pasta</div>
+          <div class="item-desc">Spaghetti in creamy mushroom sauce with sliced mushroom and herbs.</div>
+        </div>
+        <div class="item-price">RM22.90</div>
+      </div>
+    </div>
+
+    <!-- RIGHT COLUMN -->
+    <div>
+      <!-- SIDE MENU -->
+      <div class="section-heading"><span class="icon">🍟</span> Side Menu</div>
+      <div class="side-grid" style="margin-bottom:28px;">
+        <div class="side-item">
+          <img src="https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=160&q=80" alt="Curly Fries" />
+          <div class="item-name">Curly Fries</div>
+          <div class="item-price">RM8.90</div>
+        </div>
+        <div class="side-item">
+          <img src="https://images.unsplash.com/photo-1576107232684-1279f390859f?w=160&q=80" alt="French Fries" />
+          <div class="item-name">French Fries</div>
+          <div class="item-price">RM6.90</div>
+        </div>
+        <div class="side-item">
+          <img src="https://images.unsplash.com/photo-1562802378-063ec186a863?w=160&q=80" alt="Chicken Nugget" />
+          <div class="item-name">Chicken Nugget (6 pcs)</div>
+          <div class="item-price">RM8.90</div>
+        </div>
+        <div class="side-item">
+          <img src="https://images.unsplash.com/photo-1548340748-6a23e8b1b3f9?w=160&q=80" alt="Mozzarella Sticks" />
+          <div class="item-name">Mozzarella Sticks (4 pcs)</div>
+          <div class="item-price">RM9.90</div>
+        </div>
+      </div>
+
+      <!-- SODA SERIES -->
+      <div class="section-heading"><span class="icon">🧃</span> Soda Series</div>
+      <div class="drinks-grid" style="margin-bottom:24px;">
+        <div class="drink-card">
+          <img src="https://images.unsplash.com/photo-1648638695756-a7e5a2e3aeb5?w=160&q=80" alt="Blue Ocean Soda" />
+          <div class="item-name">Blue Ocean Soda</div>
+          <div class="item-price">RM9.90</div>
+        </div>
+        <div class="drink-card">
+          <img src="https://images.unsplash.com/photo-1470338745628-171cf53de3a8?w=160&q=80" alt="Strawberry Soda" />
+          <div class="item-name">Strawberry Soda</div>
+          <div class="item-price">RM9.90</div>
+        </div>
+        <div class="drink-card">
+          <img src="https://images.unsplash.com/photo-1546173159-315724a31696?w=160&q=80" alt="Mango Soda" />
+          <div class="item-name">Mango Soda</div>
+          <div class="item-price">RM9.90</div>
+        </div>
+      </div>
+
+      <!-- CREAMY SERIES -->
+      <div class="section-heading"><span class="icon">🧋</span> Creamy Series</div>
+      <div class="drinks-grid" style="margin-bottom:10px;">
+        <div class="drink-card">
+          <img src="https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=160&q=80" alt="Chocolate Ice Blended" />
+          <div class="item-name">Chocolate Ice Blended</div>
+          <div class="item-price">RM13.90</div>
+        </div>
+        <div class="drink-card">
+          <img src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=160&q=80" alt="Creamy Caramel Latte" />
+          <div class="item-name">Creamy Caramel Latte</div>
+          <div class="item-price">RM12.90</div>
+        </div>
+        <div class="drink-card">
+          <img src="https://images.unsplash.com/photo-1587308595390-e87e7a8f6b1a?w=160&q=80" alt="Vanilla Milkshake" />
+          <div class="item-name">Vanilla Milkshake</div>
+          <div class="item-price">RM12.90</div>
+        </div>
+      </div>
+      <div class="drinks-grid-2" style="margin-bottom:24px;">
+        <div class="drink-card">
+          <img src="https://images.unsplash.com/photo-1623065422902-30a2d299bbe4?w=160&q=80" alt="Coconut Shake" />
+          <div class="item-name">Coconut Shake</div>
+          <div class="item-price">RM12.90</div>
+        </div>
+        <div class="drink-card">
+          <img src="https://images.unsplash.com/photo-1553361371-9b22f78e8b1d?w=160&q=80" alt="Strawberry Milkshake" />
+          <div class="item-name">Strawberry Milkshake</div>
+          <div class="item-price">RM12.90</div>
+        </div>
+      </div>
+
+      <!-- DESSERT -->
+      <div class="section-heading"><span class="icon">🍰</span> Dessert</div>
+      <div class="dessert-grid">
+        <div class="dessert-card">
+          <img src="https://images.unsplash.com/photo-1607958996333-41aef7caefaa?w=160&q=80" alt="Brownies" />
+          <div class="item-name">Brownies</div>
+          <div class="item-price">RM9.90</div>
+        </div>
+        <div class="dessert-card">
+          <img src="https://images.unsplash.com/photo-1562376552-0d160a2f238d?w=160&q=80" alt="Waffle with Ice Cream" />
+          <div class="item-name">Waffle with Ice Cream</div>
+          <div class="item-price">RM12.90</div>
+        </div>
+        <div class="dessert-card">
+          <img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=160&q=80" alt="Croissant with Hot Choc Dip" />
+          <div class="item-name">Croissant with Hot Choc Dip</div>
+          <div class="item-price">RM9.90</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- BOTTOM ROW: Non-milky + Hot Drinks -->
+  <div class="two-col-bottom">
+    <div>
+      <div class="section-heading"><span class="icon">🥤</span> Refreshing / Non-Milky Drinks</div>
+      <div class="list-section">
+        <div class="list-row"><span class="name">Iced Lemon Tea</span><span class="price">RM8.90</span></div>
+        <div class="list-row"><span class="name">Honey Lemon</span><span class="price">RM8.90</span></div>
+        <div class="list-row"><span class="name">Passion Fruit Tea</span><span class="price">RM8.90</span></div>
+        <div class="list-row"><span class="name">Orange Juice</span><span class="price">RM8.90</span></div>
+        <div class="list-row"><span class="name">Apple Juice</span><span class="price">RM8.90</span></div>
+        <div class="list-row"><span class="name">Mineral Water</span><span class="price">RM2.00</span></div>
+      </div>
+    </div>
+    <div>
+      <div class="section-heading"><span class="icon">☕</span> Hot Drinks</div>
+      <div class="list-section">
+        <div class="list-row"><span class="name">Hot Americano</span><span class="price">RM8.90</span></div>
+        <div class="list-row"><span class="name">Hot Cappuccino</span><span class="price">RM10.90</span></div>
+        <div class="list-row"><span class="name">Hazelnut Latte</span><span class="price">RM11.90</span></div>
+        <div class="list-row"><span class="name">Matcha Latte</span><span class="price">RM11.90</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div>Thank you for dining with us! 🤍</div>
+  <div class="social">📘 📸 @crustandbrew.cafe</div>
+</footer>
+
+</body>
+</html>
